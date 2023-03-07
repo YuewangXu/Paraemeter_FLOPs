@@ -203,6 +203,19 @@ Flops_List.append('SSF FLOPs = ' + str(flops/1000**3) + 'G')
 
 
 
+### -------> SwinNet <------- ###
+## Note: AssertionError: Input image size (256*256) doesn't match model (384*384).
+## increase the tensor scale
+from SwinNet.Swin_Transformer import SwinTransformer,SwinNet
+
+net = SwinNet().cuda()
+input, depth = torch.randn(1, 3, 384, 384).cuda(), torch.randn(1, 3, 384, 384).cuda()
+flops, _ = profile(net, inputs=(input, depth,))
+print('SwinNet FLOPs = ' + str(flops/1000**3) + 'G')
+Flops_List.append('SwinNet FLOPs = ' + str(flops/1000**3) + 'G')
+
+
+
 ### -------> MPDNet <------- ####
 # Note: The MPDNet models will be released after the work is accepted
 
